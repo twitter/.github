@@ -1,4 +1,15 @@
-"$schema": "./schema.json"
+# Default repolinter ruleset for Twitter open source repositories.
+#
+# This excludes some rules from the default repolinter ruleset because these
+# files are inherited from the org-wide .github repository:
+#
+# - code-of-conduct-file-exists
+# - code-of-conduct-file-contains-email
+# - security-file-exists
+# - github-issue-template-exists
+# - github-pull-request-template-exists
+
+"$schema": "https://raw.githubusercontent.com/todogroup/repolinter/master/rulesets/schema.json"
 version: 2
 axioms:
   linguist: language
@@ -30,48 +41,6 @@ rules:
         globsAny:
         - "{docs/,.github/,}CONTRIB*"
         nocase: true
-  code-of-conduct-file-exists:
-    level: error
-    rule:
-      type: file-existence
-      options:
-        globsAny:
-        - "{docs/,.github/,}CODEOFCONDUCT*"
-        - "{docs/,.github/,}CODE-OF-CONDUCT*"
-        - "{docs/,.github/,}CODE_OF_CONDUCT*"
-        nocase: true
-  changelog-file-exists:
-    level: error
-    rule:
-      type: file-existence
-      options:
-        globsAny:
-        - CHANGELOG*
-        nocase: true
-  security-file-exists:
-    level: error
-    rule:
-      type: file-existence
-      options:
-        globsAny:
-        - "{docs/,.github/,}SECURITY.md"
-  support-file-exists:
-    level: error
-    rule:
-      type: file-existence
-      options:
-        globsAny:
-        - "{docs/,.github/,}SUPPORT*"
-        nocase: true
-  readme-references-license:
-    level: error
-    rule:
-      type: file-contents
-      options:
-        globsAll:
-        - README*
-        content: license
-        flags: i
   binaries-not-present:
     level: error
     rule:
@@ -81,15 +50,6 @@ rules:
         - "**/*.exe"
         - "**/*.dll"
         - "!node_modules/**"
-  test-directory-exists:
-    level: error
-    rule:
-      type: directory-existence
-      options:
-        globsAny:
-        - "**/test*"
-        - "**/specs"
-        nocase: true
   integrates-with-ci:
     level: error
     rule:
@@ -106,52 +66,19 @@ rules:
         - ".drone.yml"
         - ".github/workflows/*"
         - azure-pipelines.yml
-  code-of-conduct-file-contains-email:
-    level: error
-    rule:
-      type: file-contents
-      options:
-        globsAll:
-        - CODEOFCONDUCT*
-        - CODE-OF-CONDUCT*
-        - CODE_OF_CONDUCT*
-        - ".github/CODEOFCONDUCT*"
-        - ".github/CODE-OF-CONDUCT*"
-        - ".github/CODE_OF_CONDUCT*"
-        content: ".+@.+\\..+"
-        flags: i
-        human-readable-content: email address
   source-license-headers-exist:
     level: warning
     rule:
       type: file-starts-with
       options:
         globsAll:
-        - "**/*.js"
+        - "**/*.{c,cc,c++,go,java,js,py,scala}"
         - "!node_modules/**"
         lineCount: 5
         patterns:
         - Copyright
         - License
         flags: i
-  github-issue-template-exists:
-    level: error
-    rule:
-      type: file-existence
-      options:
-        dirs: true
-        globsAny:
-        - ISSUE_TEMPLATE*
-        - ".github/ISSUE_TEMPLATE*"
-  github-pull-request-template-exists:
-    level: error
-    rule:
-      type: file-existence
-      options:
-        dirs: true
-        globsAny:
-        - PULL_REQUEST_TEMPLATE*
-        - ".github/PULL_REQUEST_TEMPLATE*"
   javascript-package-metadata-exists:
     level: error
     where:
@@ -236,15 +163,3 @@ rules:
     rule:
       type: license-detectable-by-licensee
       options: {}
-  notice-file-exists:
-    level: error
-    where:
-    - license=Apache-2.0
-    rule:
-      type: file-existence
-      options:
-        globsAny:
-        - NOTICE*
-        fail-message: The NOTICE file is described in section 4.4 of the Apache License
-          version 2.0. Its presence is not mandated by the license itself, but by
-          ASF policy.
