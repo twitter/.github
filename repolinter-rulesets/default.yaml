@@ -55,16 +55,9 @@ rules:
       type: file-existence
       options:
         globsAny:
-        - ".gitlab-ci.yml"
+        # currently Twitter really only uses Travis and GitHub Actions
         - ".travis.yml"
-        - appveyor.yml
-        - ".appveyor.yml"
-        - circle.yml
-        - ".circleci/config.yml"
-        - Jenkinsfile
-        - ".drone.yml"
-        - ".github/workflows/*"
-        - azure-pipelines.yml
+        - ".github/workflows/!(repolinter.yml|cla.yml)"
   source-license-headers-exist:
     level: warning
     rule:
