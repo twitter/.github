@@ -50,6 +50,16 @@ rules:
         flags: i
     policyUrl: http://go/oss-licensing
 
+  codemeta-file-exists:
+    level: error
+    rule:
+      type: file-existence
+      options:
+        globsAny:
+        - codemeta.json
+        - codemeta.yaml
+        nocase: true
+
   readme-file-exists:
     level: error
     rule:
@@ -86,3 +96,17 @@ rules:
         # currently Twitter really only uses Travis and GitHub Actions
         - ".travis.yml"
         - ".github/workflows/!(repolinter.yml|cla.yml)"
+
+  # make sure all TODOs for newly created projects have been completed and removed
+  complete-new-project-todos:
+    level: error
+    rule:
+      type: file-not-contents
+      options:
+        globsAll:
+        - "README.*"
+        - "codemeta.*"
+        flags: i
+        content: TODO\(new project\)
+        human-readable-content: TODO(new project)
+
