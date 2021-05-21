@@ -15,6 +15,8 @@ axioms:
   linguist: language
   licensee: license
 rules:
+
+  # License related rules
   license-file-exists:
     level: error
     rule:
@@ -24,6 +26,30 @@ rules:
         - LICENSE*
         - COPYING*
         nocase: true
+    policyUrl: http://go/oss-licensing
+  license-detectable-by-licensee:
+    level: warning
+    where:
+    - license=*
+    rule:
+      type: license-detectable-by-licensee
+      options: {}
+    policyUrl: http://go/oss-licensing
+  source-license-headers-exist:
+    level: warning
+    rule:
+      type: file-starts-with
+      options:
+        globsAll:
+        - "**/*.{c,cc,c++,go,java,js,py,scala}"
+        - "!node_modules/**"
+        lineCount: 5
+        patterns:
+        - Copyright
+        - License
+        flags: i
+    policyUrl: http://go/oss-licensing
+
   readme-file-exists:
     level: error
     rule:
@@ -40,6 +66,7 @@ rules:
         globsAny:
         - "{docs/,.github/,}CONTRIB*"
         nocase: true
+
   binaries-not-present:
     level: error
     rule:
@@ -49,6 +76,7 @@ rules:
         - "**/*.exe"
         - "**/*.dll"
         - "!node_modules/**"
+
   integrates-with-ci:
     level: error
     rule:
@@ -58,23 +86,3 @@ rules:
         # currently Twitter really only uses Travis and GitHub Actions
         - ".travis.yml"
         - ".github/workflows/!(repolinter.yml|cla.yml)"
-  source-license-headers-exist:
-    level: warning
-    rule:
-      type: file-starts-with
-      options:
-        globsAll:
-        - "**/*.{c,cc,c++,go,java,js,py,scala}"
-        - "!node_modules/**"
-        lineCount: 5
-        patterns:
-        - Copyright
-        - License
-        flags: i
-  license-detectable-by-licensee:
-    level: 'off'
-    where:
-    - license=*
-    rule:
-      type: license-detectable-by-licensee
-      options: {}
