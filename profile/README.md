@@ -1,4 +1,4 @@
-![Blue Twitter logo in front of black and white textured background](twitter-banner.png)
+![Blue Twitter logo in front of black and white textured background](https://raw.githubusercontent.com/twitter/.github/main/profile/twitter-banner.png)
 
 Twitter is what's happening and what people are talking about right now.
 It's where news breaks and communities converge.
