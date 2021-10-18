@@ -50,15 +50,15 @@ rules:
         flags: i
     policyUrl: http://go/oss-licensing
 
-  codemeta-file-exists:
-    level: error
-    rule:
-      type: file-existence
-      options:
-        globsAny:
-        - codemeta.json
-        - codemeta.yaml
-        nocase: true
+# codemeta-file-exists:
+#   level: error
+#   rule:
+#     type: file-existence
+#     options:
+#       globsAny:
+#       - codemeta.json
+#       - codemeta.yaml
+#       nocase: true
 
   readme-file-exists:
     level: error
