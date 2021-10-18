@@ -41,9 +41,9 @@ rules:
       type: file-starts-with
       options:
         globsAll:
-        - "**/*.{c,cc,c++,go,java,js,py,rb,scala}"
+        - "**/*.{c,cc,c++,go,h,java,js,m,py,rb,scala,sh,swift}"
         - "!node_modules/**"
-        lineCount: 5
+        lineCount: 8
         patterns:
         - Copyright
         - License
