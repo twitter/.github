@@ -1,8 +1,7 @@
 ![White Twitter logo in front of a textured horizontal banner of blue overlaid on white](https://raw.githubusercontent.com/twitter/.github/main/profile/twitter-banner.png)
 
 Twitter is what's happening and what people are talking about right now.
-It's where news breaks and communities converge.
-And it's all powered by open source, made by a team of amazing Tweeps.
+It's where news breaks and communities converge and it's all powered by open source, made by a team of amazing Tweeps.
 
 ## Participating in the community
 
